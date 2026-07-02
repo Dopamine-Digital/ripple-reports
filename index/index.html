@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<title>AI HTS Exposure Scan | Ripple Technologies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e1e1f;
+  --dark:#040404;
+  --accent:#efff1f;
+  --accent-deep:#d8e800;
+  --accent-tint:#f7ffc9;
+  --muted:#5d6c7b;
+  --line:#e0e0e0;
+  --bg:#fafafa;
+  --bg-soft:#f2f2f2;
+  --card:#ffffff;
+  --mono:'Fragment Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Geist',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px 90px}
+svg{display:block}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none}}
+
+/* ===== Top bar ===== */
+.topbar{background:#fff;padding:14px 0;border-bottom:1px solid var(--line)}
+.topbar .row{max-width:900px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-logo{height:25px;width:auto;display:block}
+.brand .rdiv{width:1px;height:26px;background:var(--line)}
+.brand .region{font-size:11px;font-weight:500;letter-spacing:2.4px;text-transform:uppercase;color:var(--ink);font-family:var(--mono)}
+.ai-pill{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--ink);color:#fff;font-size:11px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;padding:7px 14px;border-radius:30px;font-family:var(--mono)}
+.ai-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+/* ===== Hero ===== */
+.hero{background:
+   radial-gradient(circle at 88% 6%,rgba(239,255,31,.10),transparent 44%),
+   linear-gradient(150deg,#1e1e1f 0%,#0a0a0b 72%,#040404 100%);
+  color:#fff;padding:50px 0 128px;position:relative;overflow:hidden}
+.hero .grid-tex{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.20) 1px,transparent 1px);background-size:26px 26px;opacity:.10;pointer-events:none}
+.hero .row{max-width:900px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+.kicker{font-size:11.5px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);font-family:var(--mono)}
+.hero h1{font-size:40px;font-weight:800;letter-spacing:-1.2px;line-height:1.05;margin:13px 0 14px;display:inline-block}
+.hero h1 .ul{box-shadow:inset 0 -5px 0 var(--accent)}
+.hero .sub{font-size:16px;color:#c4c8c5;max-width:640px;line-height:1.6}
+.prepared{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:24px;max-width:560px}
+.prepared .chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:9px;padding:8px 13px;font-size:12.5px;color:#e7e7e5}
+.prepared .chip b{color:var(--accent);font-weight:600}
+
+/* ===== Headline card ===== */
+.headline-card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.12);padding:30px 34px;margin-top:-92px;position:relative;z-index:3}
+.hc-top{display:grid;grid-template-columns:1.5fr 1fr;gap:34px;align-items:center}
+.hc-num .lbl{font-size:11.5px;font-weight:500;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted);font-family:var(--mono)}
+.hc-num .big{font-size:clamp(40px,7vw,62px);font-weight:700;color:var(--ink);letter-spacing:-2px;line-height:1;margin:7px 0 3px;font-family:var(--mono)}
+.hc-num .punch{margin:10px 0 7px}
+.hc-num .punch span{font-size:14.5px;font-weight:600;color:var(--ink);box-shadow:inset 0 -3px 0 var(--accent);-webkit-box-decoration-break:clone;box-decoration-break:clone;line-height:1.7}
+.hc-num .big .cur{font-size:.5em;vertical-align:super;font-weight:600;letter-spacing:0}
+.hc-num .sub{font-size:13px;color:var(--muted)}
+.hc-verify{display:flex;flex-direction:column;gap:11px;padding-top:4px}
+.hc-verify .v{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink)}
+.hc-verify .v svg{width:18px;height:18px;color:var(--ink);flex-shrink:0;margin-top:1px}
+
+/* breakdown bar */
+.breakdown{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
+.breakdown .bd-lbl{font-size:11px;font-weight:500;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);margin-bottom:11px;font-family:var(--mono)}
+.bar{display:flex;height:15px;border-radius:8px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);transform:scaleX(0);transform-origin:left;animation:grow 1s cubic-bezier(.4,0,.2,1) .25s forwards}
+@keyframes grow{to{transform:scaleX(1)}}
+.bar span{height:100%}
+.bar span:not(:last-child){border-right:2px solid #fff}
+.seg1{background:#1e1e1f}.seg2{background:#3f4145}.seg3{background:#758696}.seg4{background:#b9c200}.seg5{background:#efff1f}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px}
+.legend .lg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);font-family:var(--mono)}
+.legend .sw{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+
+.offer-strip{display:flex;gap:14px;align-items:center;background:var(--accent);border:1px solid var(--accent-deep);border-radius:14px;padding:17px 22px;margin-top:16px;box-shadow:0 6px 18px rgba(0,0,0,.10)}
+.offer-strip svg{width:23px;height:23px;color:var(--ink);flex-shrink:0}
+.offer-strip p{font-size:15px;color:var(--ink);line-height:1.5;margin:0}
+.offer-strip strong{font-weight:700}
+@media(max-width:560px){.offer-strip{align-items:flex-start;gap:11px}}
+
+/* ===== Section ===== */
+.section{margin-top:50px}
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:7px}
+.section-head h2{font-size:23px;font-weight:700;color:var(--ink);letter-spacing:-.5px}
+.section-head .num{font-size:12.5px;font-weight:500;color:var(--accent);background:var(--ink);padding:4px 11px;border-radius:20px;font-family:var(--mono)}
+.section-intro{font-size:14.5px;color:var(--muted);max-width:690px;margin-bottom:24px}
+
+/* snapshot */
+.snapshot{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 28px;box-shadow:0 8px 26px rgba(0,0,0,.05)}
+.snapshot .scan-note{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ink);font-weight:600;margin-bottom:18px;font-family:var(--mono)}
+.snapshot .scan-note svg{width:16px;height:16px}
+.snapshot ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 30px}
+.snapshot li{font-size:14px;color:var(--ink);padding-left:22px;position:relative;line-height:1.5}
+.snapshot li svg{position:absolute;left:0;top:4px;width:14px;height:14px;color:var(--ink)}
+.snapshot li b{color:var(--ink);font-weight:700}
+
+/* dossier */
+.dossier{display:grid;gap:18px;margin-top:22px}
+.find{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+.find .find-label{font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-family:var(--mono);margin-bottom:4px}
+.find .find-src{display:inline-block;font-size:10.5px;font-weight:500;letter-spacing:.4px;color:var(--dark);background:var(--bg-soft);border:1px solid var(--line);padding:2px 9px;border-radius:20px;font-family:var(--mono);margin-bottom:10px}
+.find .find-body{font-size:14px;color:var(--ink);line-height:1.55}
+.find .find-body b{font-weight:700}
+.find .find-m{font-size:13.5px;color:var(--ink);background:var(--accent-tint);border-radius:8px;padding:10px 13px;margin-top:12px;line-height:1.5;border-left:3px solid var(--accent-deep)}
+.find .find-m b{font-weight:700}
+
+/* hts table */
+.hts-tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0 4px;font-family:var(--mono)}
+.hts-tbl th{text-align:left;font-weight:600;color:var(--muted);padding:6px 10px;border-bottom:1.5px solid var(--line);font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+.hts-tbl td{padding:7px 10px;border-bottom:1px solid var(--line);color:var(--ink)}
+.hts-tbl tr:last-child td{border-bottom:none}
+.hts-tbl .flag{color:#c00;font-weight:600}
+
+/* leak cards */
+.leaks{display:grid;gap:15px}
+.leak{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px 22px 23px;display:grid;grid-template-columns:52px 1fr auto;grid-template-areas:"ic title est" "ic desc est";column-gap:19px;row-gap:3px;align-items:center;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.04);transition:box-shadow .22s,transform .22s,border-color .22s}
+.leak::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--accent),var(--accent-deep));transform:scaleY(0);transform-origin:top;transition:transform .25s}
+.leak:hover{box-shadow:0 16px 38px rgba(0,0,0,.12);transform:translateY(-3px);border-color:var(--accent-deep)}
+.leak:hover::before{transform:scaleY(1)}
+.leak .ic{grid-area:ic;width:52px;height:52px;border-radius:13px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.leak .ic svg{width:25px;height:25px}
+.leak h3{grid-area:title;font-size:16.5px;font-weight:700;color:var(--ink);margin-bottom:5px;letter-spacing:-.2px}
+.leak p{grid-area:desc;font-size:13.5px;color:var(--muted);line-height:1.55;max-width:470px}
+.leak .est{grid-area:est;display:flex;align-items:center;gap:9px;flex-wrap:wrap;flex-shrink:0}
+.leak .est .amt{font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.5px;white-space:nowrap;font-family:var(--mono)}
+.leak .est .lab{font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--dark);background:var(--accent);padding:3px 9px;border-radius:20px;font-family:var(--mono)}
+
+/* proof */
+.proof{background:radial-gradient(circle at 90% 110%,rgba(239,255,31,.16),transparent 48%),linear-gradient(155deg,#1e1e1f,#040404);color:#fff;border-radius:18px;padding:36px 38px;position:relative;overflow:hidden}
+.proof .grid-tex{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1px);background-size:24px 24px;opacity:.07}
+.proof .tag{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-family:var(--mono)}
+.proof .story{position:relative;z-index:2;font-size:16.5px;line-height:1.6;color:#e7ece9;margin:15px 0 22px;max-width:670px}
+.proof .story b{color:#fff}
+.proof .arc{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.proof .step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:15px 16px}
+.proof .step .badge{width:24px;height:24px;border-radius:7px;background:var(--accent);color:var(--dark);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:10px;font-family:var(--mono)}
+.proof .step .t{font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--accent);font-family:var(--mono)}
+.proof .step .d{font-size:13px;color:#dfe5e0;margin-top:4px;line-height:1.45}
+.proof .quote{position:relative;z-index:2;font-size:19px;font-weight:600;color:#fff;border-left:3px solid var(--accent);padding-left:18px;line-height:1.45}
+.proof .quote span{display:block;font-size:12.5px;font-weight:400;color:#aab0ac;margin-top:9px;letter-spacing:.3px}
+.proof .pstats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 22px}
+.proof .pstats .st{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:13px 12px;text-align:center}
+.proof .pstats .st .n{font-size:14px;white-space:nowrap;font-weight:700;color:#fff;font-family:var(--mono);letter-spacing:-.5px;line-height:1}
+.proof .pstats .st .l{font-size:9.5px;font-weight:500;letter-spacing:.3px;text-transform:uppercase;color:var(--accent);margin-top:7px;line-height:1.3;font-family:var(--mono)}
+
+/* worth */
+.worth{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 28px;box-shadow:0 8px 26px rgba(0,0,0,.05)}
+.worth h2{font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px}
+.worth .wlead{font-size:14px;color:var(--muted);margin-bottom:18px}
+.worth .wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+@media(max-width:860px){.worth .wgrid{grid-template-columns:1fr 1fr}}
+.worth .wc{background:var(--bg-soft);border-radius:12px;padding:16px 15px}
+.worth .wc .n{font-size:17px;white-space:nowrap;font-weight:700;color:var(--ink);font-family:var(--mono);letter-spacing:-.5px;line-height:1.05}
+.worth .wc:first-child{background:var(--accent);border:1px solid var(--accent-deep)}
+.worth .wc:first-child .n{font-size:21px}
+.worth .wc:first-child .l{color:#2c3137}
+.worth .wc .l{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.35}
+.worth .eg{margin-top:16px;font-size:13.5px;color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:13px 15px;line-height:1.5}
+.worth .eg b{font-weight:700}
+@media(max-width:600px){.proof .pstats{grid-template-columns:1fr 1fr}.worth .wgrid{grid-template-columns:1fr 1fr}}
+
+/* offer */
+.offer{background:linear-gradient(155deg,#1e1e1f,#040404);border:1.5px solid var(--accent-deep);border-radius:18px;padding:30px 32px;box-shadow:0 14px 40px rgba(0,0,0,.20)}
+.offer .eyebrow{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--dark);background:var(--accent);padding:5px 12px;border-radius:30px;font-family:var(--mono)}
+.offer h3{font-size:clamp(20px,4.4vw,26px);font-weight:800;color:#fff;letter-spacing:-.5px;margin:14px 0 16px;line-height:1.15}
+.offer .how{list-style:none;display:grid;gap:11px;margin-bottom:20px}
+.offer .how li{display:flex;gap:11px;font-size:14.5px;color:#e7ece9;line-height:1.5}
+.offer .how li svg{width:19px;height:19px;color:var(--accent);flex-shrink:0;margin-top:2px}
+.offer .how li b{font-weight:700}
+.offer .stack-lbl{font-size:11px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;color:#9aa3ab;margin-bottom:8px;font-family:var(--mono)}
+.offer .stack{display:grid;gap:0;margin-bottom:14px}
+.offer .srow{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:14px;color:#e7ece9;padding:11px 0;border-bottom:1px dashed rgba(255,255,255,.14)}
+.offer .srow .d{flex:1;min-width:0}
+.offer .srow .v{text-decoration:line-through;color:#8b9298;font-size:12.5px;white-space:nowrap;font-family:var(--mono)}
+.offer .srow .free{color:var(--dark);background:var(--accent);font-weight:700;font-size:10.5px;letter-spacing:.5px;padding:2px 8px;border-radius:20px;white-space:nowrap;font-family:var(--mono);align-self:center}
+.offer .total{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-weight:800;color:#fff;font-size:15px;margin-bottom:22px}
+.offer .total .v{text-decoration:line-through;color:#8b9298;font-weight:600;font-family:var(--mono);margin-right:6px}
+.offer .guar{background:rgba(255,255,255,.05);border:1px solid rgba(239,255,31,.28);border-radius:14px;padding:20px 22px;display:grid;grid-template-columns:52px 1fr;grid-template-areas:"ic title" "ic body";column-gap:18px;row-gap:7px;align-items:start}
+.offer .guar .shield{grid-area:ic;width:52px;height:52px;border-radius:13px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.offer .guar .shield svg{width:25px;height:25px}
+.offer .guar h3{grid-area:title;margin:0;font-size:17.5px;font-weight:800;color:#fff;letter-spacing:-.2px;line-height:1.3}
+.offer .guar p{grid-area:body;font-size:14px;color:#e7ece9;line-height:1.5;margin:0}
+.offer .guar p b{font-weight:700;color:#fff}
+
+/* guarantee */
+.guarantee{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px;padding:24px 28px;display:flex;gap:19px;align-items:center;margin-top:18px}
+.guarantee .shield{width:48px;height:48px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--ink);flex-shrink:0;box-shadow:0 6px 16px rgba(0,0,0,.10)}
+.guarantee .shield svg{width:26px;height:26px}
+.guarantee p{font-size:15px;color:var(--ink);line-height:1.55}
+.guarantee p b{color:var(--ink);font-weight:700;box-shadow:inset 0 -3px 0 var(--accent)}
+
+/* CTA */
+.cta{text-align:center;margin-top:50px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:44px 30px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.cta .who{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px}
+.cta .who .av{width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--ink);box-shadow:0 6px 16px rgba(0,0,0,.22);flex-shrink:0}
+.cta .who .av img{width:100%;height:100%;object-fit:cover;display:block}
+.cta .who .wt{text-align:left;font-size:12.5px;color:var(--muted);line-height:1.3}
+.cta .who .wt b{display:block;color:var(--ink);font-size:14px;font-weight:700}
+.cta .who .wt .role{display:block}
+.cta .who .wt a{color:#0a66c2;text-decoration:none;font-size:12px;display:inline-flex;align-items:center;gap:5px;margin-top:5px;font-family:var(--mono);font-weight:500}
+.cta .who .wt a:hover{color:#004182;text-decoration:underline}
+.cta .who .wt a svg{width:13px;height:13px}
+.cta h2{font-size:27px;font-weight:800;color:var(--ink);letter-spacing:-.6px;margin-bottom:9px}
+.cta p{font-size:15px;color:var(--muted);max-width:560px;margin:0 auto 24px}
+.btn{position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:var(--dark);font-weight:700;font-size:15.5px;letter-spacing:.2px;padding:16px 36px;border-radius:12px;text-decoration:none;border:1.5px solid var(--accent-deep);box-shadow:0 5px 16px rgba(0,0,0,.22);transition:transform .15s,box-shadow .15s;animation:btnpulse 2.8s ease-in-out infinite}
+.btn>*{position:relative;z-index:2}
+.btn::before{content:"";position:absolute;inset:0;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0) 55%);z-index:1;pointer-events:none}
+.btn::after{content:"";position:absolute;top:-20%;left:-70%;width:45%;height:140%;z-index:1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg);animation:sheen 3.4s ease-in-out infinite;pointer-events:none}
+@keyframes sheen{0%,58%{left:-70%}100%{left:150%}}
+@keyframes btnpulse{0%,100%{box-shadow:0 5px 16px rgba(0,0,0,.22)}50%{box-shadow:0 7px 22px rgba(0,0,0,.30)}}
+.btn:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(0,0,0,.30)}
+.btn svg{width:18px;height:18px}
+@media(prefers-reduced-motion:reduce){.btn,.btn::after{animation:none}}
+.cta .reassure{font-size:12.5px;color:var(--muted);margin-top:17px}
+
+/* footer */
+.foot{text-align:center;margin-top:42px;font-size:11.5px;color:#9e9e9e;line-height:1.7;max-width:700px;margin-left:auto;margin-right:auto}
+.foot .logo-sm{font-weight:700;color:var(--ink);font-size:13px;letter-spacing:.3px}
+
+@media(max-width:720px){
+  .hc-top{grid-template-columns:1fr;gap:18px}
+  .hc-num .big{font-size:clamp(24px,8vw,46px)}
+  .hc-verify{padding-top:0}
+  .hero h1{font-size:30px}
+  .prepared{grid-template-columns:1fr}
+  .snapshot ul{grid-template-columns:1fr}
+  .proof .arc{grid-template-columns:1fr}
+  .proof .pstats{grid-template-columns:1fr 1fr}
+  .worth .wgrid{grid-template-columns:1fr 1fr}
+  .leak{grid-template-columns:auto 1fr;grid-template-areas:"ic title" "desc desc" "est est";column-gap:14px;row-gap:11px;align-items:center;padding:22px 20px}
+  .leak h3{margin-bottom:0;line-height:1.3}
+  .leak .est{justify-self:end;text-align:right}
+  .leak p{max-width:none}
+  .offer{padding:24px 18px}
+  .offer .srow{flex-wrap:wrap}
+  .offer .guar{grid-template-columns:auto 1fr;grid-template-areas:"ic title" "body body";column-gap:14px;align-items:center}
+  .offer .total{flex-wrap:wrap}
+  .guarantee{flex-wrap:wrap}
+  .dossier .find{padding:18px 16px}
+  .hts-tbl{font-size:11px}
+  .hts-tbl th,.hts-tbl td{padding:5px 6px}
+}
+@media(max-width:560px){
+  .topbar .row{flex-wrap:wrap;gap:10px}
+  .brand .rdiv,.brand .region{display:none}
+  .ai-pill{white-space:normal;font-size:10px;letter-spacing:.6px}
+  .section-head{flex-wrap:wrap}
+}
+@media(max-width:430px){
+  .proof .pstats{grid-template-columns:1fr}
+  .worth .wgrid{grid-template-columns:1fr}
+}
+
+/* ===== Mobile hardening: zero horizontal overflow ===== */
+html,body{max-width:100%;overflow-x:hidden}
+img{max-width:100%;height:auto}svg{max-width:100%}
+.hc-num,.hc-verify,.leak p,.offer .srow .d,.worth .wc,.proof .pstats .st{min-width:0}
+.hc-num .big{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<header class="topbar">
+  <div class="row">
+    <div class="brand">
+      <img class="brand-logo" src="../assets/ripple-logo.svg" alt="Ripple Technologies">
+      <span class="rdiv"></span>
+      <span class="region">US Imports</span>
+    </div>
+    <div class="ai-pill"><span class="dot"></span> AI HTS Exposure Scan</div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="grid-tex"></div>
+  <div class="row">
+    <div class="kicker">Prepared for</div>
+    <h1><span class="ul">Alliance Cargo Express</span></h1>
+    <p class="sub">Our AI scanned 40+ public signals about your operations and benchmarked them against US air freight forwarders handling similar cargo diversity. Here is where companies like yours quietly overpay on classification and duty before a single shipment&nbsp;clears.</p>
+    <div class="prepared">
+      <div class="chip">Sector: <b>Air freight forwarding</b></div>
+      <div class="chip">Est. volume: <b>80&ndash;150 entries/mo</b></div>
+      <div class="chip">Region: <b>United States</b></div>
+      <div class="chip">Scan date: <b>2 July 2026</b></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- Headline card -->
+  <div class="headline-card">
+    <div class="hc-top">
+      <div class="hc-num">
+        <div class="lbl">What manual HTS classification costs you each month</div>
+        <div class="big"><span class="cur">US$</span>5,200</div>
+        <div class="punch"><span>About half of that, roughly $2,600 a month, is pure waste Ripple wipes the day it takes over.</span></div>
+        <div class="sub">Modeled from your cargo diversity and entry volume at real industry rates: $3 to $5 per line item across 80 to 150 entries monthly (10 to 20 lines each), plus the ops staff time spent classifying between other duties. This is the classification cost, separate from the duty your clients legally owe. We confirm the exact figure against your own entries on a free 30 minute demo. Modeled range: $3,800 to $6,500 a&nbsp;month.</div>
+      </div>
+      <div class="hc-verify">
+        <div class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Built from public trade data and your service profile, no access to your systems required</div>
+        <div class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Benchmarked against US air freight forwarders handling similar cargo diversity</div>
+        <div class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Verified line by line against your real HTS codes on the scan, or you owe nothing</div>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-lbl">Where the money goes each month</div>
+      <div class="bar">
+        <span class="seg1" style="width:35%"></span>
+        <span class="seg2" style="width:28%"></span>
+        <span class="seg3" style="width:19%"></span>
+        <span class="seg4" style="width:10%"></span>
+        <span class="seg5" style="width:8%"></span>
+      </div>
+      <div class="legend">
+        <div class="lg"><span class="sw seg1"></span> Broker &amp; classification fees</div>
+        <div class="lg"><span class="sw seg2"></span> Manual classification labor</div>
+        <div class="lg"><span class="sw seg3"></span> Overpaid duty from misclassification</div>
+        <div class="lg"><span class="sw seg4"></span> Penalty &amp; audit exposure</div>
+        <div class="lg"><span class="sw seg5"></span> Clearance delays</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offer strip -->
+  <div class="offer-strip reveal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <p>The 30 minute demo is <strong>free</strong>. If we can&rsquo;t show you at least <strong>$2,600 a month</strong> in savings, we put <strong>$1,000 toward your next broker invoice</strong>.</p>
+  </div>
+
+  <!-- Snapshot -->
+  <div class="section">
+    <div class="section-head"><h2>What we found about you</h2></div>
+    <div class="snapshot">
+      <div class="scan-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> AI-read from your website, LinkedIn, IATA directory, FMCSA records and public customs data</div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>Classifying across 10+ HS chapters</b> on every shipment, from perishables and pharmaceuticals to semiconductors, hazmat and luxury&nbsp;vehicles</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>Handling customs clearance for clients</b>, where every misclassification risks your client relationship and your forwarder&nbsp;reputation</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>No dedicated customs classification staff</b> found in your public team, a signal the work falls on operations people handling it alongside other&nbsp;duties</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>Serving 13 US hub airports</b> from JFK to LAX, where multi-origin shipments multiply the classification load on every&nbsp;entry</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>No public evidence of classification software</b>, just an online quoting tool and cargo tracking, a signal that HTS assignment is still a manual&nbsp;process</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>Growing since 2018 with expanding cargo types</b>, where every new commodity vertical adds HTS chapters your team has to learn from&nbsp;scratch</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Data Dossier -->
+  <div class="section">
+    <div class="section-head"><h2>The data behind the scan</h2><span class="num">6 sources</span></div>
+    <p class="section-intro">Every finding below is from a specific public source. We pair each with a plain "what this means for you" line so the numbers make sense at&nbsp;a glance.</p>
+    <div class="dossier">
+
+      <div class="find">
+        <div class="find-label">Cargo diversity and classification complexity</div>
+        <div class="find-src">acecargo.us / services</div>
+        <div class="find-body">ACE handles <b>16+ distinct cargo categories</b>: perishable goods (fresh produce, seafood, cut flowers), pharmaceuticals, hazardous materials, live animals, luxury vehicles, semiconductors, heavy and oversized cargo, fine arts, military cargo, e-commerce shipments, and humanitarian aid. Each category falls under different HTS chapters with different duty rates and classification&nbsp;rules.</div>
+        <div class="find-m"><b>What this means for you:</b> a forwarder classifying across this many commodity types cannot build repetition-based accuracy on any single product. Every shipment is a fresh classification decision touching a different part of the HTS schedule. That diversity is exactly where manual classification errors cluster, because the person assigning codes has to context-switch between chapters on every&nbsp;entry.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-label">What your clients ship and the real duty rates</div>
+        <div class="find-src">USITC HTS Schedule / acecargo.us</div>
+        <div class="find-body">Based on your service pages and cargo specialties, your entries touch HTS chapters spanning duty rates from 0% to over 25%, with Section 301 tariffs stacking an additional 7.5% to 25% on China-origin goods across electronics, pharmaceuticals and general&nbsp;merchandise.</div>
+        <table class="hts-tbl">
+          <tr><th>Cargo category</th><th>Typical HTS chapter</th><th>Base duty</th><th>Notes</th></tr>
+          <tr><td>Perishables (produce)</td><td>Ch. 07/08</td><td>0%&ndash;29.8%</td><td>Rate varies by product and season</td></tr>
+          <tr><td>Pharmaceuticals</td><td>Ch. 30</td><td>0%&ndash;6.5%</td><td>Many qualify duty-free if classified correctly</td></tr>
+          <tr><td>Semiconductors</td><td>Ch. 85</td><td>0%&ndash;6.5%</td><td class="flag">301 tariffs add 25% on China origin</td></tr>
+          <tr><td>Luxury vehicles</td><td>Ch. 87</td><td>2.5%&ndash;25%</td><td>Classification determines truck vs car rate</td></tr>
+          <tr><td>Hazmat chemicals</td><td>Ch. 28/29</td><td>0%&ndash;6.5%</td><td>Subheading determines if duty-free applies</td></tr>
+          <tr><td>Live animals</td><td>Ch. 01</td><td>0%&ndash;6.8%</td><td>Species and purpose drive the heading</td></tr>
+        </table>
+        <div class="find-m"><b>What this means for you:</b> with duty rates ranging from 0% to 25%+ across your cargo mix, a single misclassification on a semiconductor or vehicle line can swing thousands of dollars on one entry. For your clients, that error comes back to you as the forwarder who filed it. Across a year of entries, those swings compound into real&nbsp;money.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-label">Customs and classification staffing</div>
+        <div class="find-src">LinkedIn / Apollo / Public records</div>
+        <div class="find-body">We searched for dedicated customs, trade compliance or HTS classification roles at Alliance Cargo Express. <b>No dedicated customs classification staff found.</b> Your co-founder Nikolay Pyagay holds "Export Compliance" and "Certified Screening" credentials, but no one with "customs classifier," "trade compliance analyst," or "HTS specialist" in their title was found. No open roles for these positions were&nbsp;listed.</div>
+        <div class="find-m"><b>What this means for you:</b> when classification is handled by operations staff on top of their primary duties (freight coordination, client management, screening), error rates run higher and the work takes longer. A co-founder splitting time between export compliance and running the business does not have the same classification throughput as a dedicated specialist or an AI agent that does nothing&nbsp;else.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-label">Multi-airport network and origin diversity</div>
+        <div class="find-src">acecargo.us / airports-we-serve</div>
+        <div class="find-body">ACE operates across <b>13 US hub airports</b> (JFK, BOS, EWR, LAX, IAD, ORD, MIA, ATL, DFW, IAH, SEA, SFO, MCO) with airline partnerships including Qatar Airways, Emirates, Etihad, Turkish Cargo, Lufthansa Cargo and Cargolux. Cargo flows inbound from Asia, Europe, Africa and the Middle East into US customs&nbsp;entries.</div>
+        <div class="find-m"><b>What this means for you:</b> multi-origin shipments from different countries carry different tariff treatments (301 on China, AD/CVD on specific products). Without a centralized classification system, the same product arriving from Vietnam vs. China gets a dramatically different duty treatment, and a missed origin determination means your client quietly overpays or gets flagged on&nbsp;audit.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-label">Technology and classification tools</div>
+        <div class="find-src">acecargo.us / Gateway JFK</div>
+        <div class="find-body">ACE runs an <b>online quotation system</b> ("ACE Online Quotes") and real-time cargo tracking, and has invested in screening equipment for security compliance. However, <b>no public evidence of automated HTS classification software</b>, AI-assisted tariff tools, or integration with classification platforms like Descartes, Integration Point, or similar was found. Classification appears to be done manually or outsourced to external customs&nbsp;brokers.</div>
+        <div class="find-m"><b>What this means for you:</b> your quoting and tracking systems are digital, but the classification step that determines how much duty your clients pay on every shipment is still a manual process. That gap is the one Ripple fills, classifying every line automatically before the entry is filed so the broker submits a clean, accurate&nbsp;code.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-label">Growth trajectory and scaling pressure</div>
+        <div class="find-src">Medium / IATA / JFK Air Cargo Association</div>
+        <div class="find-body">ACE was founded in <b>2018</b> by Nikolay Pyagay and Roman Mizerota, starting from a single Queens office. The company has since expanded to multiple offices across states and countries, is an <b>IATA-certified</b> member, <b>CNS</b> and <b>WCA</b> member, and an active participant in the <b>JFK Air Cargo Association</b>. They recently added specialty verticals including pharmaceutical logistics, semiconductor handling and humanitarian&nbsp;aid.</div>
+        <div class="find-m"><b>What this means for you:</b> every new cargo vertical you add (pharma, semiconductors, vehicles) introduces HTS chapters your team has never classified before. Growth without a classification system means the manual workload scales linearly with volume, and the error rate stays flat or rises as staff stretch thinner. That is the point where automated classification pays for itself&nbsp;fastest.</div>
+      </div>
+
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:14px;font-family:var(--mono)">Sources: <a href="http://acecargo.us" style="color:var(--muted)">acecargo.us</a>, <a href="https://www.linkedin.com/company/alliance-cargo-express/" style="color:var(--muted)">Company LinkedIn</a>, <a href="https://www.linkedin.com/in/allexpcargo/" style="color:var(--muted)">Nikolay Pyagay LinkedIn</a>, IATA directory, FMCSA records, USITC HTS&nbsp;schedule</p>
+  </div>
+
+  <!-- Leak map -->
+  <div class="section">
+    <div class="section-head"><h2>What this is costing you, by area</h2><span class="num">5 areas</span></div>
+    <p class="section-intro">Each area below is where US air freight forwarders handling diverse cargo most often overpay. Figures are benchmark estimates for your entry volume and cargo mix, confirmed against your actual HTS lines on the free&nbsp;scan.</p>
+    <div class="leaks">
+
+      <div class="leak">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <h3>Broker and classification fees</h3>
+        <p>External brokers and classification partners charge $3 to $5 per line item. Across your diverse cargo entries, that per-line fee stacks into a recurring monthly bill for work an AI agent now does at a fraction of the&nbsp;cost.</p>
+        <div class="est"><div class="amt">US$1,500&ndash;2,200</div><div class="lab">Est / mo</div></div>
+      </div>
+
+      <div class="leak">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Manual classification labor</h3>
+        <p>Without a dedicated classifier, your ops team assigns HTS codes between freight coordination and client calls. That split attention means each entry takes longer and the error rate is higher than a specialist or AI agent would&nbsp;deliver.</p>
+        <div class="est"><div class="amt">US$1,200&ndash;1,800</div><div class="lab">Est / mo</div></div>
+      </div>
+
+      <div class="leak">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Overpaid duty from misclassification</h3>
+        <p>A wrong HTS code means the wrong duty rate for your client. With 301 tariffs stacking 25% on China-origin semiconductors and electronics, even one misclassified line can swing hundreds of dollars on a single&nbsp;entry.</p>
+        <div class="est"><div class="amt">US$800&ndash;1,200</div><div class="lab">Est / mo</div></div>
+      </div>
+
+      <div class="leak">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <h3>Penalty and audit exposure</h3>
+        <p>CBP holds forwarders to reasonable care. A misclassified line on a client entry surfaces as back duty, interest and penalties on audit, and for a forwarder the reputational cost with that client compounds the financial&nbsp;hit.</p>
+        <div class="est"><div class="amt">US$400&ndash;700</div><div class="lab">Est / mo</div></div>
+      </div>
+
+      <div class="leak">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>Clearance delays and demurrage</h3>
+        <p>Classification queries hold air shipments at the airport. For time-sensitive cargo like perishables and pharmaceuticals, every hour of delay risks spoilage or missed delivery windows and ties up your client's&nbsp;cash.</p>
+        <div class="est"><div class="amt">US$300&ndash;500</div><div class="lab">Est / mo</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Proof -->
+  <div class="section">
+    <div class="proof">
+      <div class="grid-tex"></div>
+      <div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="20 6 9 17 4 12"/></svg> Proof, a real deployment</div>
+      <p class="story">A client of ours, <b>Pentagon</b>, part of JAS Worldwide, runs customs across <b>31 jurisdictions</b> as a billion-dollar freight forwarder. They were carrying the exact load flagged above, brokers and in-house heads assigning codes by hand across diverse cargo types. Our classification agent went onto their live entry flow and found the same&nbsp;leaks.</p>
+      <div class="pstats">
+        <div class="st"><div class="n">3 wks &rarr; 15 min</div><div class="l">per large invoice</div></div>
+        <div class="st"><div class="n">99.8%</div><div class="l">accuracy vs ~75% manual</div></div>
+        <div class="st"><div class="n">40%</div><div class="l">lower clearance cost</div></div>
+        <div class="st"><div class="n">31</div><div class="l">jurisdictions live</div></div>
+      </div>
+      <div class="arc">
+        <div class="step"><div class="badge">1</div><div class="t">Week 2</div><div class="d">Agent live on their entry flow, classifying invoices automatically.</div></div>
+        <div class="step"><div class="badge">2</div><div class="t">Week 6</div><div class="d">Running at machine speed across all 31 jurisdictions.</div></div>
+        <div class="step"><div class="badge">3</div><div class="t">Outcome</div><div class="d">40% lower clearance cost, classifiers freed for higher-value work.</div></div>
+      </div>
+      <div class="quote">&ldquo;A 40% reduction in customs clearance costs, across 31 jurisdictions.&rdquo;<span>Pentagon, part of JAS Worldwide</span></div>
+    </div>
+  </div>
+
+  <!-- What it's worth -->
+  <div class="section">
+    <div class="worth">
+      <h2>What it is worth to fix this</h2>
+      <p class="wlead">Ripple saves you about <b style="color:var(--ink)">US$2,600 a month</b>, roughly half your classification cost. Classifying by hand runs you about US$5,200 a month, and here is where the saving comes&nbsp;from.</p>
+      <div class="wgrid">
+        <div class="wc"><div class="n">$2,600 / mo</div><div class="l">saved every month once Ripple takes over, about half your classification cost</div></div>
+        <div class="wc"><div class="n">$3&ndash;5 / line</div><div class="l">broker per-line fees removed</div></div>
+        <div class="wc"><div class="n">$1.2K&ndash;1.8K</div><div class="l">in ops staff time freed each month</div></div>
+        <div class="wc"><div class="n">3 wks &rarr; 15 min</div><div class="l">per large invoice</div></div>
+      </div>
+      <div class="eg"><b>Worked example:</b> an air freight forwarder handling your cargo diversity models to about US$5,200 a month in classification cost, separate from the duty your clients legally owe. Ripple takes roughly half of that off the table, about <b>$2,600 a month</b> back in your pocket, plus the overpaid duty it catches for your clients. We confirm it against your real entries on the&nbsp;demo.</div>
+    </div>
+  </div>
+
+  <!-- The offer -->
+  <div class="section">
+    <div class="offer">
+      <span class="eyebrow">Your free 30-minute HTS review</span>
+      <h3>See how Ripple's HTS classification AI can save you about $2,600 a month, live on your own numbers.</h3>
+      <ul class="how">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><b>Send us one real invoice</b>, even a thousand-line monster.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><b>We classify every HTS line</b> and map your duty and labour leak to the dollar.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><b>You see your number and the fix</b> on a 30-minute call, no obligation.</span></li>
+      </ul>
+      <div class="stack-lbl">What you get, free</div>
+      <div class="stack">
+        <div class="srow"><span class="d">Full HTS classification of one real invoice</span><span class="v">$2,000</span><span class="free">FREE</span></div>
+        <div class="srow"><span class="d">Per-line audit-grade evidence report</span><span class="v">$1,500</span><span class="free">FREE</span></div>
+        <div class="srow"><span class="d">30-minute customs exposure review with Adrian</span><span class="v">$500</span><span class="free">FREE</span></div>
+      </div>
+      <div class="total"><span>Total value</span><span><span class="v">$4,000</span>yours free</span></div>
+      <div class="guar">
+        <span class="shield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+        <h3>Our guarantee<sup>*</sup></h3>
+        <p><b>In the worst case you leave with a custom report. If we can't show you at least $2,600 a month in savings, we put $1,000 toward your next broker invoice.</b></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="who">
+      <div class="av"><img src="../assets/adrian-smith.jpg" alt="Adrian Smith"></div>
+      <div class="wt"><b>Adrian Smith</b><span class="role">Founder, Ripple Technologies</span>
+        <a href="https://www.linkedin.com/in/asmith-1/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34V9.96H5.56v8.38h2.78zM6.95 8.73a1.61 1.61 0 1 0 0-3.22 1.61 1.61 0 0 0 0 3.22zm11.39 9.61v-4.59c0-2.45-1.31-3.59-3.06-3.59-1.41 0-2.04.78-2.39 1.32v-1.13H9.9v8.38h2.78v-4.65c0-.25.02-.49.09-.67.2-.49.65-1 1.4-1 .99 0 1.39.75 1.39 1.85v4.47h2.78z"/></svg> Connect on LinkedIn</a>
+      </div>
+    </div>
+    <h2>See your real numbers in 30 minutes</h2>
+    <p>This is a free 30 minute classification review with Adrian. We pull your actual HTS lines and show you exactly where the duty and labor leak sits, no obligation either&nbsp;way.</p>
+    <a class="btn" href="https://calendly.com/adrian-dhia/fit-check-call" target="_blank" rel="noopener">Book your 30 minute review <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <div class="reassure">No obligation. If it is not worth your time, you will know inside 30 minutes.</div>
+  </div>
+
+  <!-- Footer -->
+  <div class="foot">
+    <div class="logo-sm">Ripple Technologies &middot; useripple.io</div>
+    Agentic AI for customs and logistics operations.<br>
+    This scan is an AI assisted analysis based on publicly available trade data and sector benchmarks. All figures are estimates and are confirmed on the scan. Prepared for the named recipient only.<br>
+    <span style="font-style:italic;opacity:.85">*Provided you meet our requirements and criteria. The $1,000 broker-invoice credit is applied as a Ripple platform credit toward an equivalent classification&nbsp;run.</span>
+  </div>
+
+</div>
+
+<!-- Open-tracking beacon -->
+<script>
+var CLICKUP_TASK = "86ey4jvbu";
+var beaconUrl = "https://docs.dopaminedigital.io/track?event=opened&report=1&client=ripple&pc=US&pcity=Queens&slug=ace-alliance-cargo-express&title=ACE%20Alliance%20Cargo%20Express%20HTS%20Scan&task=" + CLICKUP_TASK;
+var img = new Image(1,1);
+img.src = beaconUrl;
+img.style.cssText = "position:absolute;opacity:0";
+document.body.appendChild(img);
+</script>
+
+<script>
+(function(){
+  var sel='.headline-card,.section-head,.snapshot,.leak,.proof,.guarantee,.cta,.offer-strip,.worth,.offer,.dossier,.find';
+  var els=[].slice.call(document.querySelectorAll(sel));
+  els.forEach(function(el){el.classList.add('reveal')});
+  if(!('IntersectionObserver' in window)){els.forEach(function(el){el.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>
