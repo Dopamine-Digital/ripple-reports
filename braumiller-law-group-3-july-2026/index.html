@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<title>AI HTS Exposure Scan | Braumiller Law Group | Ripple Technologies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e1e1f;
+  --dark:#040404;
+  --accent:#efff1f;
+  --accent-deep:#d8e800;
+  --accent-tint:#f7ffc9;
+  --muted:#5d6c7b;
+  --line:#e0e0e0;
+  --bg:#fafafa;
+  --bg-soft:#f2f2f2;
+  --card:#ffffff;
+  --mono:'Fragment Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Geist',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px 90px}
+svg{display:block}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none}}
+
+/* ===== Top bar ===== */
+.topbar{background:#fff;padding:14px 0;border-bottom:1px solid var(--line)}
+.topbar .row{max-width:900px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-logo{height:25px;width:auto;display:block}
+.brand .rdiv{width:1px;height:26px;background:var(--line)}
+.brand .region{font-size:11px;font-weight:500;letter-spacing:2.4px;text-transform:uppercase;color:var(--ink);font-family:var(--mono)}
+.ai-pill{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--ink);color:#fff;font-size:11px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;padding:7px 14px;border-radius:30px;font-family:var(--mono)}
+.ai-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+/* ===== Hero ===== */
+.hero{background:
+   radial-gradient(circle at 88% 6%,rgba(239,255,31,.10),transparent 44%),
+   linear-gradient(150deg,#1e1e1f 0%,#0a0a0b 72%,#040404 100%);
+  color:#fff;padding:50px 0 128px;position:relative;overflow:hidden}
+.hero .grid-tex{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.20) 1px,transparent 1px);background-size:26px 26px;opacity:.10;pointer-events:none}
+.hero .row{max-width:900px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+.kicker{font-size:11.5px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);font-family:var(--mono)}
+.hero h1{font-size:40px;font-weight:800;letter-spacing:-1.2px;line-height:1.05;margin:13px 0 14px;display:inline-block}
+.hero h1 .ul{box-shadow:inset 0 -5px 0 var(--accent)}
+.hero .sub{font-size:16px;color:#c4c8c5;max-width:640px;line-height:1.6}
+.prepared{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:24px;max-width:560px}
+.prepared .chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:9px;padding:8px 13px;font-size:12.5px;color:#e7e7e5}
+.prepared .chip b{color:var(--accent);font-weight:600}
+
+/* ===== Headline card ===== */
+.headline-card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.12);padding:30px 34px;margin-top:-92px;position:relative;z-index:3}
+.hc-top{display:grid;grid-template-columns:1.5fr 1fr;gap:34px;align-items:center}
+.hc-num .lbl{font-size:11.5px;font-weight:500;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted);font-family:var(--mono)}
+.hc-num .big{font-size:clamp(40px,7vw,62px);font-weight:700;color:var(--ink);letter-spacing:-2px;line-height:1;margin:7px 0 3px;font-family:var(--mono)}
+.hc-num .punch{margin:10px 0 7px}
+.hc-num .punch span{font-size:14.5px;font-weight:600;color:var(--ink);box-shadow:inset 0 -3px 0 var(--accent);-webkit-box-decoration-break:clone;box-decoration-break:clone;line-height:1.7}
+.hc-num .big .cur{font-size:.5em;vertical-align:super;font-weight:600;letter-spacing:0}
+.hc-num .sub{font-size:13px;color:var(--muted)}
+.hc-verify{display:flex;flex-direction:column;gap:11px;padding-top:4px}
+.hc-verify .v{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink)}
+.hc-verify .v svg{width:18px;height:18px;color:var(--ink);flex-shrink:0;margin-top:1px}
+
+/* breakdown bar */
+.breakdown{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
+.breakdown .bd-lbl{font-size:11px;font-weight:500;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);margin-bottom:11px;font-family:var(--mono)}
+.bar{display:flex;height:15px;border-radius:8px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);transform:scaleX(0);transform-origin:left;animation:grow 1s cubic-bezier(.4,0,.2,1) .25s forwards}
+@keyframes grow{to{transform:scaleX(1)}}
+.bar span{height:100%}
+.bar span:not(:last-child){border-right:2px solid #fff}
+.seg1{background:#1e1e1f}.seg2{background:#3f4145}.seg3{background:#758696}.seg4{background:#b9c200}.seg5{background:#efff1f}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px}
+.legend .lg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);font-family:var(--mono)}
+.legend .sw{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+
+.offer-strip{display:flex;gap:14px;align-items:center;background:var(--accent);border:1px solid var(--accent-deep);border-radius:14px;padding:17px 22px;margin-top:16px;box-shadow:0 6px 18px rgba(0,0,0,.10)}
+.offer-strip svg{width:23px;height:23px;color:var(--ink);flex-shrink:0}
+.offer-strip p{font-size:15px;color:var(--ink);line-height:1.5;margin:0}
+.offer-strip strong{font-weight:700}
+@media(max-width:560px){.offer-strip{align-items:flex-start;gap:11px}}
+
+/* ===== Section ===== */
+.section{margin-top:50px}
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:7px}
+.section-head h2{font-size:23px;font-weight:700;color:var(--ink);letter-spacing:-.5px}
+.section-head .num{font-size:12.5px;font-weight:500;color:var(--accent);background:var(--ink);padding:4px 11px;border-radius:20px;font-family:var(--mono)}
+.section-intro{font-size:14.5px;color:var(--muted);max-width:690px;margin-bottom:24px}
+
+/* snapshot */
+.snapshot{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 28px;box-shadow:0 8px 26px rgba(0,0,0,.05)}
+.snapshot .scan-note{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ink);font-weight:600;margin-bottom:18px;font-family:var(--mono)}
+.snapshot .scan-note svg{width:16px;height:16px}
+.snapshot ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 30px}
+.snapshot li{font-size:14px;color:var(--ink);padding-left:22px;position:relative;line-height:1.5}
+.snapshot li svg{position:absolute;left:0;top:4px;width:14px;height:14px;color:var(--ink)}
+.snapshot li b{color:var(--ink);font-weight:700}
+
+/* dossier */
+.dossier{display:grid;gap:18px;margin-top:22px}
+.find{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+.find .find-label{font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-family:var(--mono);margin-bottom:4px}
+.find .find-src{display:inline-block;font-size:10.5px;font-weight:500;letter-spacing:.4px;color:var(--dark);background:var(--bg-soft);border:1px solid var(--line);padding:2px 9px;border-radius:20px;font-family:var(--mono);margin-bottom:10px}
+.find .find-body{font-size:14px;color:var(--ink);line-height:1.55}
+.find .find-body b{font-weight:700}
+.find .find-m{font-size:13.5px;color:#e7ece9;background:#1e1e1f;border-radius:8px;padding:11px 14px;margin-top:12px;line-height:1.5;border-left:3px solid var(--accent)}
+.find .find-m b{font-weight:700;color:var(--accent)}
+
+/* HTS table inside dossier */
+.hts-tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0 4px;font-family:var(--mono)}
+.hts-tbl th{text-align:left;font-weight:600;color:var(--muted);padding:6px 10px;border-bottom:1.5px solid var(--line);font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+.hts-tbl td{padding:7px 10px;border-bottom:1px solid var(--line);color:var(--ink)}
+.hts-tbl tr:last-child td{border-bottom:none}
+.hts-tbl .flag{color:#c00;font-weight:600}
+
+/* leak cards */
+.leaks{display:grid;gap:15px}
+.leak{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px 22px 23px;display:grid;grid-template-columns:52px 1fr auto;grid-template-areas:"ic title est" "ic desc est";column-gap:19px;row-gap:3px;align-items:center;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.04);transition:box-shadow .22s,transform .22s,border-color .22s}
+.leak::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--accent),var(--accent-deep));transform:scaleY(0);transform-origin:top;transition:transform .25s}
+.leak:hover{box-shadow:0 16px 38px rgba(0,0,0,.12);transform:translateY(-3px);border-color:var(--accent-deep)}
+.leak:hover::before{transform:scaleY(1)}
+.leak .ic{grid-area:ic;width:52px;height:52px;border-radius:13px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.leak .ic svg{width:25px;height:25px}
+.leak h3{grid-area:title;font-size:16.5px;font-weight:700;color:var(--ink);margin-bottom:5px;letter-spacing:-.2px}
+.leak p{grid-area:desc;font-size:13.5px;color:var(--muted);line-height:1.55;max-width:470px}
+.leak .est{grid-area:est;display:flex;align-items:center;gap:9px;flex-wrap:wrap;flex-shrink:0}
+.leak .est .amt{font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.5px;white-space:nowrap;font-family:var(--mono)}
+.leak .est .lab{font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--dark);background:var(--accent);padding:3px 9px;border-radius:20px;font-family:var(--mono)}
+
+/* proof */
+.proof{background:radial-gradient(circle at 90% 110%,rgba(239,255,31,.16),transparent 48%),linear-gradient(155deg,#1e1e1f,#040404);color:#fff;border-radius:18px;padding:36px 38px;position:relative;overflow:hidden}
+.proof .grid-tex{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1px);background-size:24px 24px;opacity:.07}
+.proof .tag{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-family:var(--mono)}
+.proof .story{position:relative;z-index:2;font-size:16.5px;line-height:1.6;color:#e7ece9;margin:15px 0 22px;max-width:670px}
+.proof .story b{color:#fff}
+.proof .arc{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.proof .step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:15px 16px}
+.proof .step .badge{width:24px;height:24px;border-radius:7px;background:var(--accent);color:var(--dark);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:10px;font-family:var(--mono)}
+.proof .step .t{font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--accent);font-family:var(--mono)}
+.proof .step .d{font-size:13px;color:#dfe5e0;margin-top:4px;line-height:1.45}
+.proof .quote{position:relative;z-index:2;font-size:19px;font-weight:600;color:#fff;border-left:3px solid var(--accent);padding-left:18px;line-height:1.45}
+.proof .quote span{display:block;font-size:12.5px;font-weight:400;color:#aab0ac;margin-top:9px;letter-spacing:.3px}
+
+/* guarantee */
+.guarantee{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px;padding:24px 28px;display:flex;gap:19px;align-items:center;margin-top:18px}
+.guarantee .shield{width:48px;height:48px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--ink);flex-shrink:0;box-shadow:0 6px 16px rgba(0,0,0,.10)}
+.guarantee .shield svg{width:26px;height:26px}
+.guarantee p{font-size:15px;color:var(--ink);line-height:1.55}
+.guarantee p b{color:var(--ink);font-weight:700;box-shadow:inset 0 -3px 0 var(--accent)}
+
+/* CTA */
+.cta{text-align:center;margin-top:50px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:44px 30px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.cta .who{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px}
+.cta .who .av{width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--ink);box-shadow:0 6px 16px rgba(0,0,0,.22);flex-shrink:0}
+.cta .who .av img{width:100%;height:100%;object-fit:cover;display:block}
+.cta .who .wt{text-align:left;font-size:12.5px;color:var(--muted);line-height:1.3}
+.cta .who .wt b{display:block;color:var(--ink);font-size:14px;font-weight:700}
+.cta .who .wt .role{display:block}
+.cta .who .wt a{color:#0a66c2;text-decoration:none;font-size:12px;display:inline-flex;align-items:center;gap:5px;margin-top:5px;font-family:var(--mono);font-weight:500}
+.cta .who .wt a:hover{color:#004182;text-decoration:underline}
+.cta .who .wt a svg{width:13px;height:13px}
+.cta h2{font-size:27px;font-weight:800;color:var(--ink);letter-spacing:-.6px;margin-bottom:9px}
+.cta p{font-size:15px;color:var(--muted);max-width:560px;margin:0 auto 24px}
+.btn{position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:var(--dark);font-weight:700;font-size:15.5px;letter-spacing:.2px;padding:16px 36px;border-radius:12px;text-decoration:none;border:1.5px solid var(--accent-deep);box-shadow:0 5px 16px rgba(0,0,0,.22);transition:transform .15s,box-shadow .15s;animation:btnpulse 2.8s ease-in-out infinite}
+.btn>*{position:relative;z-index:2}
+.btn::before{content:"";position:absolute;inset:0;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0) 55%);z-index:1;pointer-events:none}
+.btn::after{content:"";position:absolute;top:-20%;left:-70%;width:45%;height:140%;z-index:1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg);animation:sheen 3.4s ease-in-out infinite;pointer-events:none}
+@keyframes sheen{0%,58%{left:-70%}100%{left:150%}}
+@keyframes btnpulse{0%,100%{box-shadow:0 5px 16px rgba(0,0,0,.22)}50%{box-shadow:0 7px 22px rgba(0,0,0,.30)}}
+.btn:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(0,0,0,.30)}
+.btn svg{width:18px;height:18px}
+@media(prefers-reduced-motion:reduce){.btn,.btn::after{animation:none}}
+.cta .reassure{font-size:12.5px;color:var(--muted);margin-top:17px}
+
+/* footer */
+.foot{text-align:center;margin-top:42px;font-size:11.5px;color:#9e9e9e;line-height:1.7;max-width:700px;margin-left:auto;margin-right:auto}
+.foot .logo-sm{font-weight:700;color:var(--ink);font-size:13px;letter-spacing:.3px}
+
+.proof .pstats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 22px}
+.proof .pstats .st{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:13px 12px;text-align:center}
+.proof .pstats .st .n{font-size:14px;white-space:nowrap;font-weight:700;color:#fff;font-family:var(--mono);letter-spacing:-.5px;line-height:1}
+.proof .pstats .st .l{font-size:9.5px;font-weight:500;letter-spacing:.3px;text-transform:uppercase;color:var(--accent);margin-top:7px;line-height:1.3;font-family:var(--mono)}
+.worth{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 28px;box-shadow:0 8px 26px rgba(0,0,0,.05)}
+.worth h2{font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px}
+.worth .wlead{font-size:14px;color:var(--muted);margin-bottom:18px}
+.worth .wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+@media(max-width:860px){.worth .wgrid{grid-template-columns:1fr 1fr}}
+.worth .wc{background:var(--bg-soft);border-radius:12px;padding:16px 15px}
+.worth .wc .n{font-size:17px;white-space:nowrap;font-weight:700;color:var(--ink);font-family:var(--mono);letter-spacing:-.5px;line-height:1.05}
+.worth .wc:first-child{background:var(--accent);border:1px solid var(--accent-deep)}
+.worth .wc:first-child .n{font-size:21px}
+.worth .wc:first-child .l{color:#2c3137}
+.worth .wc .l{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.35}
+.worth .eg{margin-top:16px;font-size:13.5px;color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:13px 15px;line-height:1.5}
+.worth .eg b{font-weight:700}
+@media(max-width:600px){.proof .pstats{grid-template-columns:1fr 1fr}.worth .wgrid{grid-template-columns:1fr 1fr}}
+
+.offer{background:linear-gradient(155deg,#1e1e1f,#040404);border:1.5px solid var(--accent-deep);border-radius:18px;padding:30px 32px;box-shadow:0 14px 40px rgba(0,0,0,.20)}
+.offer .eyebrow{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--dark);background:var(--accent);padding:5px 12px;border-radius:30px;font-family:var(--mono)}
+.offer h3{font-size:clamp(20px,4.4vw,26px);font-weight:800;color:#fff;letter-spacing:-.5px;margin:14px 0 16px;line-height:1.15}
+.offer .how{list-style:none;display:grid;gap:11px;margin-bottom:20px}
+.offer .how li{display:flex;gap:11px;font-size:14.5px;color:#e7ece9;line-height:1.5}
+.offer .how li svg{width:19px;height:19px;color:var(--accent);flex-shrink:0;margin-top:2px}
+.offer .how li b{font-weight:700}
+.offer .stack-lbl{font-size:11px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;color:#9aa3ab;margin-bottom:8px;font-family:var(--mono)}
+.offer .stack{display:grid;gap:0;margin-bottom:14px}
+.offer .srow{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:14px;color:#e7ece9;padding:11px 0;border-bottom:1px dashed rgba(255,255,255,.14)}
+.offer .srow .d{flex:1;min-width:0}
+.offer .srow .v{text-decoration:line-through;color:#8b9298;font-size:12.5px;white-space:nowrap;font-family:var(--mono)}
+.offer .srow .free{color:var(--dark);background:var(--accent);font-weight:700;font-size:10.5px;letter-spacing:.5px;padding:2px 8px;border-radius:20px;white-space:nowrap;font-family:var(--mono);align-self:center}
+.offer .total{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-weight:800;color:#fff;font-size:15px;margin-bottom:22px}
+.offer .total .v{text-decoration:line-through;color:#8b9298;font-weight:600;font-family:var(--mono);margin-right:6px}
+.offer .guar{background:rgba(255,255,255,.05);border:1px solid rgba(239,255,31,.28);border-radius:14px;padding:20px 22px;display:grid;grid-template-columns:52px 1fr;grid-template-areas:"ic title" "ic body";column-gap:18px;row-gap:7px;align-items:start}
+.offer .guar .shield{grid-area:ic;width:52px;height:52px;border-radius:13px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.offer .guar .shield svg{width:25px;height:25px}
+.offer .guar h3{grid-area:title;margin:0;font-size:17.5px;font-weight:800;color:#fff;letter-spacing:-.2px;line-height:1.3}
+.offer .guar p{grid-area:body;font-size:14px;color:#e7ece9;line-height:1.5;margin:0}
+.offer .guar p b{font-weight:700;color:#fff}
+
+/* ===== Mobile hardening: zero horizontal overflow (2026-06-11) ===== */
+html,body{max-width:100%;overflow-x:hidden}
+img{max-width:100%;height:auto}svg{max-width:100%}
+.hc-num,.hc-verify,.leak p,.offer .srow .d,.worth .wc,.proof .pstats .st{min-width:0}
+.hc-num .big{overflow-wrap:anywhere}
+@media(max-width:720px){
+  .hc-top{grid-template-columns:1fr;gap:18px}
+  .hc-num .big{font-size:clamp(24px,8vw,46px)}
+  .hc-verify .v{max-width:none}
+  .hero h1{font-size:30px}
+  .prepared{grid-template-columns:1fr}
+  .snapshot ul{grid-template-columns:1fr}
+  .proof .arc{grid-template-columns:1fr}
+  .proof .pstats{grid-template-columns:1fr 1fr}
+  .worth .wgrid{grid-template-columns:1fr 1fr}
+  .offer{padding:24px 18px}
+  .offer .srow{flex-wrap:wrap}
+  .offer .guar{grid-template-columns:auto 1fr;grid-template-areas:"ic title" "body body";column-gap:14px;align-items:center}
+  .offer .total{flex-wrap:wrap}
+  .guarantee{flex-wrap:wrap}
+  .leak{grid-template-columns:auto 1fr;grid-template-areas:"ic title" "desc desc" "est est";column-gap:14px;row-gap:11px;align-items:center;padding:22px 20px}
+  .leak h3{margin-bottom:0;line-height:1.3}
+  .leak .est{justify-self:end;text-align:right}
+  .leak p{max-width:none}
+  .dossier .find{padding:18px 16px}
+  .hts-tbl{font-size:11px}
+  .hts-tbl th,.hts-tbl td{padding:5px 6px}
+}
+@media(max-width:560px){
+  .topbar .row{flex-wrap:wrap;gap:10px}
+  .brand .rdiv,.brand .region{display:none}
+  .ai-pill{white-space:normal;font-size:10px;letter-spacing:.6px}
+  .section-head{flex-wrap:wrap}
+}
+@media(max-width:430px){
+  .proof .pstats{grid-template-columns:1fr}
+  .worth .wgrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<header class="topbar">
+  <div class="row">
+    <div class="brand">
+      <img class="brand-logo" src="../assets/ripple-logo.svg" alt="Ripple Technologies">
+      <span class="rdiv"></span>
+      <span class="region">US Imports</span>
+    </div>
+    <div class="ai-pill"><span class="dot"></span> AI HTS Exposure Scan</div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="grid-tex"></div>
+  <div class="row">
+    <div class="kicker">Prepared for</div>
+    <h1><span class="ul">Braumiller Law Group</span></h1>
+    <p class="sub">Our AI read your public footprint, your practice pages, your published trade commentary and your standing in the legal directories. This scan is a little different: you are not an importer, but nearly every client you advise is. Here is what manual HTS classification is quietly costing companies like your clients, and why we think that is worth 30 minutes of your&nbsp;time.</p>
+    <div class="prepared">
+      <div class="chip">Sector: <b>Customs law</b></div>
+      <div class="chip">Clients: <b>US importers</b></div>
+      <div class="chip">Region: <b>United States</b></div>
+      <div class="chip">Scan date: <b>3 July 2026</b></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- Headline card -->
+  <div class="headline-card">
+    <div class="hc-top">
+      <div class="hc-num">
+        <div class="lbl">What manual classification costs a client monthly</div>
+        <div class="big"><span class="cur">US$</span>8,000</div>
+        <div class="punch"><span>About half of that, roughly $4,000 a month per client, is pure waste an AI classification agent wipes the day it takes over.</span></div>
+        <div class="sub">Modeled for a typical mid-market importer in the industries you serve (electronics, consumer products, automotive, aerospace) at real industry rates: roughly $1 to $5 per line for classification, $15 to $30 per entry for document handling, or the one to two in-house classifiers a catalog that size needs at roughly $150K each a year. This is the classification cost, separate from the duty legally owed. Modeled range: $5,000 to $13,000 a month depending on entry&nbsp;volume.</div>
+      </div>
+      <div class="hc-verify">
+        <div class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Built from public trade and sector data, no client information touched</div>
+        <div class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Benchmarked against US importers in the mid-market band your clients sit in</div>
+        <div class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Verified line by line against a real invoice on the walkthrough, yours to choose</div>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-lbl">Where a client's money goes each month</div>
+      <div class="bar">
+        <span class="seg1" style="width:34%"></span>
+        <span class="seg2" style="width:30%"></span>
+        <span class="seg3" style="width:16%"></span>
+        <span class="seg4" style="width:11%"></span>
+        <span class="seg5" style="width:9%"></span>
+      </div>
+      <div class="legend">
+        <div class="lg"><span class="sw seg1"></span> Broker &amp; classification fees</div>
+        <div class="lg"><span class="sw seg2"></span> Manual classification labor</div>
+        <div class="lg"><span class="sw seg3"></span> Overpaid duty from misclassification</div>
+        <div class="lg"><span class="sw seg4"></span> Penalty &amp; audit exposure</div>
+        <div class="lg"><span class="sw seg5"></span> Clearance delays</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offer strip -->
+  <div class="offer-strip reveal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <p>The 30 minute walkthrough is <strong>free</strong>. Bring one real invoice, yours to choose and redacted if you like, and we will <strong>classify every line live</strong> so you can judge the accuracy&nbsp;yourself.</p>
+  </div>
+
+  <!-- Snapshot / Quick findings -->
+  <div class="section">
+    <div class="section-head"><h2>What we found about you</h2></div>
+    <div class="snapshot">
+      <div class="scan-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> AI-read from your website, LinkedIn, legal directories and your published trade commentary</div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>Boutique international trade law firm</b> with offices in Dallas, Houston, Los Angeles, Washington DC, Toledo and&nbsp;Mexico</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>Classification and tariff analysis is a named practice</b>, alongside Section 301 exclusions, duty drawback and penalty&nbsp;mitigation</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>Clients from small importers to Fortune 500</b> across aerospace, defense, electronics, consumer products and&nbsp;automotive</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>A dual legal plus consulting structure</b>, so operational compliance work sits inside the same ecosystem as the legal&nbsp;advice</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>An active content engine</b>, the BLG Podcast and the Hot Topics in International Trade newsletter, publishing on Section 301 as recently as June&nbsp;2026</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>A Chambers-ranked founder</b>, Adrienne Braumiller, ranked in International Trade: Customs every year since&nbsp;2015</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Data Dossier -->
+  <div class="section">
+    <div class="section-head"><h2>The data behind the scan</h2><span class="num">6 sources</span></div>
+    <p class="section-intro">Every finding below is from a specific public source. We pair each with a plain "what this means for you" line, because this scan is making a partnership case, not a sales&nbsp;case.</p>
+    <div class="dossier">
+
+      <div class="find">
+        <div class="find-label">Who you are</div>
+        <div class="find-src">braumillerlaw.com</div>
+        <div class="find-body">Braumiller Law Group is a <b>boutique international trade law firm</b> headquartered in Dallas with offices in Houston, Los Angeles, Washington DC, Toledo and Mexico, positioned as "Your Expert International Trade Law Partners." The firm runs a dual structure, legal plus Braumiller Consulting, "integrated into one ecosystem," so clients get both counsel and hands-on compliance&nbsp;work.</div>
+        <div class="find-m"><b>What this means for you:</b> you sit at the exact desk where importers bring their classification pain. The work Ripple automates is upstream of your legal work, which is what makes this a partnership conversation rather than a&nbsp;pitch.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-label">Your classification practice</div>
+        <div class="find-src">braumillerlaw.com / JD Supra</div>
+        <div class="find-body">Product classification and tariff analysis is a named practice area, next to Section 301 exclusion and refund work, duty drawback, USMCA, forced labor compliance and penalty mitigation. Your team published commentary on the new phase of <b>Section 301 tariffs as recently as June 2026</b>, and has walked clients through exclusion filings and CIT refund windows for&nbsp;years.</div>
+        <div class="find-m"><b>What this means for you:</b> you fix the legal consequences of bad HTS codes. Ripple fixes the codes before they become consequences. There is no overlap with the legal judgment layer, the agent just makes sure your advice lands on clean&nbsp;data.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-label">Your clients, and the duty swings they live with</div>
+        <div class="find-src">braumillerlaw.com + USITC HTS schedule</div>
+        <div class="find-body">Your client base runs from small importers to Fortune 500 across <b>aerospace, defense, electronics, consumer products and automotive</b>. Across those industries the duty consequences of one misread line are wide:</div>
+        <table class="hts-tbl">
+          <tr><th>Product category</th><th>Typical HTS chapter</th><th>Base duty</th><th>Notes</th></tr>
+          <tr><td>Wearing apparel</td><td>Ch. 61/62</td><td>12%&ndash;32%</td><td>Rate turns on fabric and construction</td></tr>
+          <tr><td>Footwear</td><td>Ch. 64</td><td>8.5%&ndash;48%</td><td>One of the widest duty ranges in the HTS</td></tr>
+          <tr><td>Electronics</td><td>Ch. 85</td><td>0%&ndash;6.5%</td><td>Many items duty-free only if classified correctly</td></tr>
+          <tr><td>Auto parts</td><td>Ch. 87</td><td>~2.5%</td><td>Section 301 adds 25% on China-origin lines</td></tr>
+          <tr><td>Steel articles</td><td>Ch. 73</td><td>~2.9%</td><td>301 plus 232 can stack past 75% on the wrong code</td></tr>
+        </table>
+        <div class="find-m"><b>What this means for you:</b> every importer on your client list carries a monthly classification spend. A typical mid-market importer models to $5,000 to $13,000 a month before a single duty dollar is&nbsp;owed.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-label">Adrienne's standing</div>
+        <div class="find-src">Chambers / State Bar of Texas</div>
+        <div class="find-body">Adrienne Braumiller has <b>30 plus years in trade law</b>, has been ranked by Chambers in International Trade: Customs every year since 2015, received the Sarah T. Hughes Women Lawyers of Achievement Award in 2019, and has co-chaired the ABA Customs Law&nbsp;Committee.</div>
+        <div class="find-m"><b>What this means for you:</b> your referral moves. When this firm tells an importer a tool is worth looking at, that importer takes the meeting. That credibility is exactly why we would rather show you the agent first than cold-pitch your&nbsp;clients.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-label">Your content engine</div>
+        <div class="find-src">BLG Podcast / Hot Topics newsletter</div>
+        <div class="find-body">The firm runs the <b>BLG Podcast</b>, a video library and the <b>Hot Topics in International Trade</b> newsletter, continuously educating importers on tariff shifts, exclusions and enforcement&nbsp;trends.</div>
+        <div class="find-m"><b>What this means for you:</b> your audience is asking what AI does to classification right now. Whether or not a partnership forms, that question is worth a segment, and Adrian will happily go on record with real deployment&nbsp;numbers.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-label">Where Ripple fits, and where it does not</div>
+        <div class="find-src">useripple.io</div>
+        <div class="find-body">Ripple is an <b>AI classification agent</b>. It assigns HTS codes with an audit-grade evidence trail for every line. It is not a law firm, it gives no legal advice, and the broker still files the&nbsp;entry.</div>
+        <div class="find-m"><b>What this means for you:</b> no channel conflict. The agent handles the volume work, your team handles the judgment calls, rulings, penalties and strategy. Clean codes in, fewer emergencies&nbsp;out.</div>
+      </div>
+
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:14px;font-family:var(--mono)">Sources: <a href="https://www.braumillerlaw.com/" target="_blank" rel="noopener" style="color:var(--muted)">Website</a> &middot; <a href="https://www.linkedin.com/company/braumiller-law-group/" target="_blank" rel="noopener" style="color:var(--muted)">Company LinkedIn</a> &middot; <a href="https://www.linkedin.com/in/adriennebraumiller" target="_blank" rel="noopener" style="color:var(--muted)">LinkedIn profile</a> &middot; <a href="https://chambers.com/lawyer/adrienne-braumiller-usa-5:931293" target="_blank" rel="noopener" style="color:var(--muted)">Chambers</a> &middot; USITC HTS&nbsp;schedule</p>
+  </div>
+
+  <!-- Leak map -->
+  <div class="section">
+    <div class="section-head"><h2>What this costs a typical client, by area</h2><span class="num">5 areas</span></div>
+    <p class="section-intro">Each area below is where mid-market US importers, the band most of your clients sit in, most often overpay. Figures are benchmark estimates for one typical client, confirmed against real HTS lines on the&nbsp;walkthrough.</p>
+    <div class="leaks">
+
+      <div class="leak">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <h3>Broker and classification fees</h3>
+        <p>External brokers and classification services charge per line, and a mid-market importer runs hundreds of lines a month. It is a recurring bill for work an agent now does at a fraction of the&nbsp;cost.</p>
+        <div class="est"><div class="amt">US$2,500&ndash;3,500</div><div class="lab">Est / mo</div></div>
+      </div>
+
+      <div class="leak">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Manual classification labor</h3>
+        <p>The clients who do it in-house carry one or two people assigning codes by hand, at $75K to $150K each loaded. Most of that work is repeatable, and you have seen what happens when it&nbsp;backs up.</p>
+        <div class="est"><div class="amt">US$2,000&ndash;3,000</div><div class="lab">Est / mo</div></div>
+      </div>
+
+      <div class="leak">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Overpaid duty from misclassification</h3>
+        <p>You know this one better than we do. A wrong code overpays quietly for years, and the refund window is shorter than the mistake. Industry studies put error rates near a third of manually classified&nbsp;lines.</p>
+        <div class="est"><div class="amt">US$1,000&ndash;1,500</div><div class="lab">Est / mo</div></div>
+      </div>
+
+      <div class="leak">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <h3>Penalty and audit exposure</h3>
+        <p>Reasonable care is your daily bread. Misclassified lines surface as back duty, interest and penalties on audit, usually landing on your desk after the damage is&nbsp;done.</p>
+        <div class="est"><div class="amt">US$600&ndash;900</div><div class="lab">Est / mo</div></div>
+      </div>
+
+      <div class="leak">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>Clearance delays and demurrage</h3>
+        <p>Classification queries hold shipments at the border. Every held container is demurrage, detention and a client phone call that did not need to&nbsp;happen.</p>
+        <div class="est"><div class="amt">US$400&ndash;600</div><div class="lab">Est / mo</div></div>
+      </div>
+
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:14px">These five areas sum to roughly US$8,000 a month for one typical mid-market client. About half is automatable waste an agent&nbsp;removes.</p>
+  </div>
+
+  <!-- Proof -->
+  <div class="section">
+    <div class="proof">
+      <div class="grid-tex"></div>
+      <div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="20 6 9 17 4 12"/></svg> Proof, a real deployment</div>
+      <p class="story">A client of ours, <b>Pentagon</b>, part of JAS Worldwide, runs customs across <b>31 jurisdictions</b> as a billion-dollar freight forwarder. They were carrying the exact load flagged above, brokers and in-house heads assigning codes by hand. Our classification agent went onto their live entry flow and found the same&nbsp;leaks.</p>
+      <div class="pstats">
+        <div class="st"><div class="n">3 wks &rarr; 15 min</div><div class="l">per large invoice</div></div>
+        <div class="st"><div class="n">99.8%</div><div class="l">accuracy vs ~75% manual</div></div>
+        <div class="st"><div class="n">40%</div><div class="l">lower clearance cost</div></div>
+        <div class="st"><div class="n">31</div><div class="l">jurisdictions live</div></div>
+      </div>
+      <div class="arc">
+        <div class="step"><div class="badge">1</div><div class="t">Week 2</div><div class="d">Agent live on their entry flow, classifying invoices automatically.</div></div>
+        <div class="step"><div class="badge">2</div><div class="t">Week 6</div><div class="d">Running at machine speed across all 31 jurisdictions.</div></div>
+        <div class="step"><div class="badge">3</div><div class="t">Outcome</div><div class="d">40% lower clearance cost, classifiers freed for higher-value work.</div></div>
+      </div>
+      <div class="quote">&ldquo;A 40% reduction in customs clearance costs, across 31 jurisdictions.&rdquo;<span>Pentagon, part of JAS Worldwide</span></div>
+    </div>
+  </div>
+
+  <!-- What it's worth -->
+  <div class="section">
+    <div class="worth reveal">
+      <h2>What this is worth to a client, and to you</h2>
+      <p class="wlead">Ripple saves a typical mid-market client about <b style="color:var(--ink)">US$4,000 a month</b>, roughly half their classification cost. Classifying by hand runs them about US$8,000 a month, and here is where the saving comes&nbsp;from.</p>
+      <div class="wgrid">
+        <div class="wc"><div class="n">$4,000/mo</div><div class="l">saved per client once the agent takes over, about half their classification cost</div></div>
+        <div class="wc"><div class="n">$1&ndash;5/line</div><div class="l">broker per-line fees removed</div></div>
+        <div class="wc"><div class="n">$2K&ndash;3K</div><div class="l">in classifier time freed each month</div></div>
+        <div class="wc"><div class="n">3 wks &rarr; 15 min</div><div class="l">per large invoice</div></div>
+      </div>
+      <div class="eg"><b>Worked example:</b> a mid-market importer on your client list models to about US$8,000 a month in classification cost, separate from the duty they legally owe. The agent takes roughly half of that off the table, about <b>$4,000 a month</b> back in their pocket, plus the overpaid duty it catches on misclassified lines. And the introduction came from&nbsp;you.</div>
+    </div>
+  </div>
+
+  <!-- The offer -->
+  <div class="section">
+    <div class="offer reveal">
+      <span class="eyebrow">Your free partner walkthrough</span>
+      <h3>See the agent classify a real invoice live, and judge whether it belongs in front of your&nbsp;clients.</h3>
+      <ul class="how">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><b>Bring one real invoice</b>, yours to choose, redacted if you like, even a thousand-line&nbsp;monster.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><b>We classify every HTS line</b> with an audit-grade evidence trail you can pull&nbsp;apart.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><b>You judge the accuracy yourself</b> on a 30 minute call with Adrian, no&nbsp;obligation.</span></li>
+      </ul>
+      <div class="stack-lbl">What you get, free</div>
+      <div class="stack">
+        <div class="srow"><span class="d">Full HTS classification of one real invoice</span><span class="v">$2,000</span><span class="free">FREE</span></div>
+        <div class="srow"><span class="d">Per-line audit-grade evidence report</span><span class="v">$1,500</span><span class="free">FREE</span></div>
+        <div class="srow"><span class="d">30-minute walkthrough with Ripple's founder</span><span class="v">$500</span><span class="free">FREE</span></div>
+      </div>
+      <div class="total"><span>Total value</span><span><span class="v">$4,000</span>yours free</span></div>
+      <div class="guar">
+        <span class="shield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+        <h3>Our guarantee<sup>*</sup></h3>
+        <p><b>In the worst case you leave with a custom classification report you can put in front of a client. If the accuracy does not hold up against your own read of the lines, tell us so on the call and we part as&nbsp;friends.</b></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="who">
+      <div class="av"><img src="../assets/adrian-smith.png" alt="Adrian Smith" style="object-position:50% 18%"></div>
+      <div class="wt"><b>Adrian Smith</b><span class="role">Founder, Ripple Technologies</span>
+        <a href="https://www.linkedin.com/in/asmith-1/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34V9.96H5.56v8.38h2.78zM6.95 8.73a1.61 1.61 0 1 0 0-3.22 1.61 1.61 0 0 0 0 3.22zm11.39 9.61v-4.59c0-2.45-1.31-3.59-3.06-3.59-1.41 0-2.04.78-2.39 1.32v-1.13H9.9v8.38h2.78v-4.65c0-.25.02-.49.09-.67.2-.49.65-1 1.4-1 .99 0 1.39.75 1.39 1.85v4.47h2.78z"/></svg> Connect on LinkedIn</a>
+      </div>
+    </div>
+    <h2>See it on a real invoice in 30 minutes</h2>
+    <p>A free 30 minute walkthrough with Adrian. Bring one invoice, yours or a client's with the details redacted, and watch the agent classify it line by line, no obligation either&nbsp;way.</p>
+    <a class="btn" href="https://calendly.com/adrian-dhia/fit-check-call" target="_blank" rel="noopener">Book your 30 minute walkthrough <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <div class="reassure">No obligation. If it is not worth your clients' money, you will know inside 30 minutes.</div>
+  </div>
+
+  <!-- Footer -->
+  <div class="foot">
+    <div class="logo-sm">Ripple Technologies &middot; useripple.io</div>
+    Agentic AI for customs and logistics operations.<br>
+    This scan is an AI assisted analysis based on publicly available information and sector benchmarks. All figures are estimates and are confirmed on the walkthrough. Ripple provides classification automation, not legal advice. Prepared for the named recipient only.<br>
+    <span style="font-style:italic;opacity:.85">*Provided you meet our requirements and criteria.</span>
+  </div>
+
+</div>
+
+<!-- Open-tracking beacon -->
+<img src="https://docs.dopaminedigital.io/track?event=opened&report=1&client=ripple&pc=US&pcity=Dallas&slug=braumiller-law-group-3-july-2026&title=Braumiller%20Law%20Group%20HTS%20Scan&task=86ey5247h" width="1" height="1" style="position:absolute;opacity:0" alt="">
+
+<script>
+(function(){
+  var sel='.headline-card,.section-head,.snapshot,.leak,.proof,.guarantee,.cta,.offer-strip,.worth,.offer,.dossier,.find';
+  var els=[].slice.call(document.querySelectorAll(sel));
+  els.forEach(function(el){el.classList.add('reveal')});
+  if(!('IntersectionObserver' in window)){els.forEach(function(el){el.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>
